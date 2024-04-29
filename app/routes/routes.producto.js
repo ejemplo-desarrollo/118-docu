@@ -3,9 +3,9 @@ import { crearProducto, eliminarProducto, modificarProducto, mostrarProducto } f
 
 const rutaProducto = Router();
 
-rutaProducto.post("/Producto", crearProducto);
-rutaProducto.get("/Producto", mostrarProducto);
-rutaProducto.put("/Producto", modificarProducto);
-rutaProducto.delete("/Producto", eliminarProducto);
+rutaProducto.post("/producto", crearProducto);
+rutaProducto.get("/producto", mostrarProducto);
+rutaProducto.put("/producto", modificarProducto);
+rutaProducto.delete("/producto", eliminarProducto);
 
 export default rutaProducto;

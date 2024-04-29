@@ -8,6 +8,7 @@ import swaggerFile from './swagger-output.json' assert { type: "json" };
 const ruta = Router();
 
 ruta.use("/api",rutaUsuario);
+
 ruta.use("/api",rutaProducto);
 ruta.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 

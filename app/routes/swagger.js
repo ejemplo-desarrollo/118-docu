@@ -2,12 +2,14 @@ import swaggerAutogen from 'swagger-autogen';
 import { config } from "dotenv";
 config();
 
+let port = process.env.PORT || 3000;
+
 const doc = {
   info: {
-    title: 'prueba',
+    title: 'Ensayo para la ficha de la mañana 118',
     description: 'Nos gusta mucho esto ahora'
   },
-  host: 'localhost:'+ process.env.PORT || 3000
+  host: 'localhost:'+ port + "/api"
 };
 
 const outputFile = './swagger-output.json';

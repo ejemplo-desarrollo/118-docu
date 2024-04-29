@@ -1,19 +1,52 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "prueba",
+    "title": "Ensayo para la ficha de la mañana 118",
     "description": "Nos gusta mucho esto ahora",
     "version": "1.0.0"
   },
-  "host": "localhost:4500",
+  "host": "localhost:4500/api",
   "basePath": "/",
   "schemes": [
     "http"
   ],
   "paths": {
-    "/Producto": {
+    "/producto": {
       "post": {
         "description": "",
+        "parameters": [
+          {
+            "name": "correo",
+            "in": "body",
+            "description": "probando",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "dato": {
+                  "type": "string",
+                  "example": "por defecto"
+                },
+                "id": {
+                  "type": "number",
+                  "example": 19800830
+                },
+                "nombre": {
+                  "type": "string",
+                  "example": "LUIS ALFONSO"
+                },
+                "edad": {
+                  "type": "number",
+                  "example": 45
+                },
+                "estado": {
+                  "type": "boolean",
+                  "example": false
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
