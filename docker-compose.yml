@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  # Node.js service
+  node:
+    image: node:20-alpine
+    ports:
+      - "3000:3000"  # Ajusta el puerto si es necesario
+    volumes:
+      - ./your-app:/app  # Reemplaza 'your-app' con el directorio de tu aplicación
+    command: ["npm", "start"]  # Ajusta el comando para iniciar tu aplicación Node.js
+
+  # MySQL service
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root  # Cambia la contraseña predeterminada
+      MYSQL_DATABASE: mydatabase  # Cambia el nombre de la base de datos
+    volumes:
+      - mysql-data:/var/lib/mysql  # Volumen para persistir datos de MySQL
+
+  # PostgreSQL service
+  postgres:
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_PASSWORD: postgres  # Cambia la contraseña predeterminada
+      POSTGRES_DB: mydatabase  # Cambia el nombre de la base de datos
+    volumes:
+      - postgres-data:/var/lib/postgresql/data  # Volumen para persistir datos de PostgreSQL
+
+  # MongoDB service
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db  # Volumen para persistir datos de MongoDB
+
+  # phpMyAdmin service (para administrar MySQL)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8080:80"  # Ajusta el puerto si es necesario
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root  # Cambia el usuario si es necesario
+      PMA_PASSWORD: root  # Cambia la contraseña si es necesario
+    depends_on:
+      - mysql  # phpMyAdmin necesita que MySQL esté disponible primero
+
+# Volúmenes para persistir datos (opcional)
+volumes:
+  mysql-data: {}
+  postgres-data: {}
+  mongo-data: {}
