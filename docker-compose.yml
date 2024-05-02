@@ -3,19 +3,22 @@ version: '3.8'
 services:
   # Node.js service
   node:
-    image: node:20-alpine
+    build: .  # Construye la imagen desde el directorio actual
     ports:
-      - "3000:3000"  # Ajusta el puerto si es necesario
+      - "4500:4500"  # Ajusta el puerto si es necesario
     volumes:
       - ./your-app:/app  # Reemplaza 'your-app' con el directorio de tu aplicación
-    command: ["npm", "dev"]  # Ajusta el comando para iniciar tu aplicación Node.js
+      - node-modules:/app/node_modules  # Volumen para el directorio node_modules
+    working_dir: /app
+    command: ["npm", "install"]  # Ejecuta npm install al iniciar el contenedor
+    entrypoint: ["npm", "start"]  # Ejecuta el comando de inicio de tu aplicación
 
   # MySQL service
   mysql:
     image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: root  # Cambia la contraseña predeterminada
-      MYSQL_DATABASE: mydatabase  # Cambia el nombre de la base de datos
+      MYSQL_DATABASE: prueba  # Cambia el nombre de la base de datos
     volumes:
       - mysql-data:/var/lib/mysql  # Volumen para persistir datos de MySQL
 
@@ -24,7 +27,7 @@ services:
     image: postgres:14-alpine
     environment:
       POSTGRES_PASSWORD: postgres  # Cambia la contraseña predeterminada
-      POSTGRES_DB: mydatabase  # Cambia el nombre de la base de datos
+      POSTGRES_DB: prueba  # Cambia el nombre de la base de datos
     volumes:
       - postgres-data:/var/lib/postgresql/data  # Volumen para persistir datos de PostgreSQL
 
@@ -34,7 +37,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - mongo-data:/data/db  # Volumen para persistir datos de MongoDB
+      - mongo-data:/data/prueba  # Volumen para persistir datos de MongoDB
 
   # phpMyAdmin service (para administrar MySQL)
   phpmyadmin:
@@ -53,3 +56,5 @@ volumes:
   mysql-data: {}
   postgres-data: {}
   mongo-data: {}
+  node-modules: {}
+
